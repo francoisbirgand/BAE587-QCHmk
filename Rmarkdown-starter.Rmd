@@ -1,7 +1,7 @@
 ---
 title: "Rmarkdown-starter"
 author: "François Birgand"
-date: "2/27/2020"
+date: "2022-09-27"
 output: html_document
 ---
 
@@ -14,6 +14,8 @@ knitr::opts_chunk$set(echo = TRUE)
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
 The beauty of Markdown is to embed R codes, within the text, such that in the end, a document could contain all the text and code to create figures and tables, in ***one document***. I have written a crash course on R Markdown, which you can find at [https://francoisbirgand.github.io/tutorial-RMarkdown_instructions.html](https://francoisbirgand.github.io/tutorial-RMarkdown_instructions.html).
+
+### The three components of an R markdown document
 
 There are three components to an R Mardown document (.Rmd):
 
@@ -34,6 +36,7 @@ After you are done reading [the crash course](https://francoisbirgand.github.io/
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
+
 ```{r cars}
 summary(cars)
 ```
@@ -42,7 +45,7 @@ summary(cars)
 
 You can also embed plots, for example a plot of this hydrograph:
 
-```{r pressure, echo=FALSE}
+```{r pressure, echo=FALSE, warning=FALSE}
 library(shape)
 hydgph<-read.csv(file = "https://raw.githubusercontent.com/francoisbirgand/discharge_and_flux_calculations/master/hydgph.csv", header = TRUE)
 names(hydgph)=c("date","Q","NO3")
@@ -52,9 +55,10 @@ xlimHG=as.POSIXct(c("1999-01-03 00:00:00","1999-01-08 00:00:00"));ylimHG=c(50,35
 plot(date,Q,xlab = "date",ylab = "Flow rate (L/s)",type = "l",col="blue",xlim=xlimHG,ylim=ylimHG)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Note that the `echo = FALSE` and `warning = FALSE` parameters were added to the code chunk to prevent printing of the R code that generated the plot and of warning messages.
 
 </br></br>
+
 You can calculate things and incorporate them directly into your R markdown document. For example, 
 
 ```

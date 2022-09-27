@@ -1,20 +1,35 @@
 ---
 title: "BAE587 - Homework #5"
 author: "Your Name"
-date: "2020-09-10"
+date: "2022-09-27"
 output:
   html_document: default
-  pdf_document: default
   word_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(fig.height=5, fig.width=9, fig.align="center", echo = FALSE)
 ```
 
+# Background
+
+The goal of this homework is to manipulate some very useful tools to derive important hydrology and water quality indicators, particularly the volume and cumulative load duration curves. For this, I am asking you to use `R` and `R Markdown` codes to write and illustrate your homework. I am giving you access to quite a bit of code such that you have a head start and you do not have to invent the wheel again. 
+
+If you are new to `R` and `R markdown`, then I cannot encourage you enough to follow the first two steps (detailed herein) before you try to complete the homework. 
+
+Much of the background technical *content* and *codes* needed to complete this homework are detailed in the “BAE587-QClab-2022.Rmd” file. However, before you get to this file, you should first open the "Rmarkdown-starter.Rmd" file and `knit` that document. You will see that this file lists references I encourage you to read to discover what `R markdown` is and how to use it. 
+
+Now, I want you to write this homework as a report you would be writing for clients that would have hired you. In other words, please remove the instruction text that I provide for each exercise in this document (including the Background part), such that it reads as a report. For example, I would like to see not only the plot I am asking, but I want to see some accompanying text that would read like: 'In this exerxise, I have plotted the hydrograph, etc.' Do leave things like ```# Exercise 1 (10 points)```. You may borrow any code from the files listed above or below to help you complete the homework. 
+
+Please submit an Rmarkdown file ("BAE587_QClab_yourname.Rmd"; make sure you change the 'yourname' part with *your name*!) and a rendered file (either html, pdf, or docx) on Moodle.
+
+
 # Exercise 1 (10 points)
 
-In figure \@ref(fig:exercise1) below, the hydrograph for the year 2012-2013 for the Chickasaw River at Franklin, OH is plotted. 
+Following example code provided in “BAE204-QClab-2022.Rmd” file, plot the hydrograph for the Chickasaw River at Franklin, OH for the year 2012-2013 (6 points). The watershed for this homework is the Chickasaw River at Franklin, Ohio (lat:40.487038, long:-84.481683). The watershed is 42.5 square kilometers in surface area, draining a predominantly flat, tile drained, agricultural watershed. The data for this file is "Lin_1h_chickasaw_all_2012-2013_SI_ref.csv". The first line of the code you will need to write for this code chunk has been added below.
+
+Think about potential seasonality (or lack thereof) of baseflow, of the magnitude of flow peaks, etc. Propose possible reasons for your observations (4 points).
 
 ```{r "exercise1", echo=FALSE, eval=TRUE}
 
@@ -25,24 +40,27 @@ data<-read.csv(file="Lin_1h_chickasaw_all_2012-2013_SI_ref.csv",header = TRUE) #
 
 # Exercise 2 (20 points)
 
-Calculating the lowest, highest, mean, median, as well as the 10^th^ and 90^th^ percentile of the flow rates yields:
+Calculate and report the lowest, highest, mean, median, as well as the 10^th^ and 90^th^ percentile of the flow rates. Please use bullet points to report your answers.  Please use embedded code and report your numbers with two significant digits.
 
-- the lowest flow was ...
-Please use embedded code. Use to report two significant numbers for square root of two, you would use the code: 
+As an example, for square root of two, you would use the code: 
 
-- square root of 2 is `r signif(sqrt(2),digits=2)` such that all the numbers you report are automatically calculated.
+```- square root of 2 is `r signif(sqrt(2),digits=3)` ```
+
+such that all the numbers you report are automatically calculated.
 
 # Exercise 3 (20 points)
 
-Calculating and comparing the arithmetic average and medium concentrations for nitrate, TP, SRP, and TSS over the entire year of record. As of note, the reference values for agricultural watersheds are, respectively, ...
+Calculate and compare the arithmetic average and median concentrations for nitrate, TP, SRP, and TSS over the entire year of record. Are there differences between the two (average and median)? What does it mean? Compare your values to the reference values for agricultural watersheds using your notes. Do not hesitate to visualize in Google Earth where this watershed is located, which might help you explain some of your calculations.
 
-You need a code chunk where you store in variables the nitrate, TP, SRP, and TSS vectors.
+You might want to use a code chunk where you store in variables for the nitrate, TP, SRP, and TSS vectors.
 
 ```{r , echo=FALSE, eval=TRUE}
 
 ```
 
-### Calculating and discussing the concentrations for nitrate 
+To help you report this, I suggest you fill in the template below:
+
+### Calculating and discussing the concentration metrics for nitrate 
 
 - The mean concentration for nitrate was ...
 
@@ -52,22 +70,28 @@ This may suggest several things:
 - the ...
 - ... What ever you want to add here.
 
-### Calculating and discussing the concentrations for total phosphorus 
+### Calculating and discussing the concentrations metrics for total phosphorus 
 
 - mean concentration for total phosphorus: .... mg P/L.
 - median concentration for total phosphorus: .... mg P/L.
 
 
 
-### Calculating and discussing the concentrations for SRP or phosphate
+### Calculating and discussing the concentrations metrics for SRP or phosphate
 
 - Fill in here.
 
+### Calculating and discussing the concentrations metrics for TSS 
+
+- Fill in here.
+
+
 # Exercise 4 (20 points)
 
-This exercise consists in ...
+Plot the hydrograph and nitrate, TP, SRP, and TSS chemographs for the Chickasaw River at Franklin, Ohio, from 2013-02-25 12:00 to 2013-03-05 12:00. You may use code from the available in “BAE587-QClab-2022.Rmd” or at https://francoisbirgand.github.io/BAE-587/introduction-to-hydrographs-chemographs-concentrations-and-loads.html#chemographs-and-concentration-levels
 
-The chemographs are plotted herein. 
+For each, report whether the chemographs exhibit a concentration or a dilution effect. Again, do not forget to add text to report what you are doing, just like you would be doing for a client. I have added some code in the chunk below, but only use it if it helps.
+
 
 </br></br>
 
@@ -88,7 +112,12 @@ The chemographs are plotted herein.
 
 # Exercise 5 (15 points)
 
-This exercise consists in ...
+Over the same 10 day period, for each of the nitrate, TP, SRP, and TSS, plot the cumulative load expressed in kg/km^2^/10 days as a function of the cumulative volume expressed in mm. Add a line connecting the first to the last point of the curve. 
+
+A nice code to calculate cumulative volume or load is give in the same book section given above.
+
+Report either on the graph or in the text below the arithmetic average and the EMC concentrations, and calculate and report their percentage difference. Make sure you use embedded code to make all your calculations and display in the text. Discuss the differences between the two.
+
 
 ```{r eval =TRUE, echo = FALSE,fig.height=10}
 
@@ -96,7 +125,8 @@ This exercise consists in ...
 
 # Exercise 6 (15 points)
 
-This exercise consists in ...
+Over ***the entire 2012-2013 hydrological year***, for each of the nitrate, TP, SRP, and TSS, plot on the same figure, the Volume duration curves and the Cumulative load duration curves. For this, you may find example code [in the book](https://francoisbirgand.github.io/BAE-587/introduction-to-hydrographs-chemographs-concentrations-and-loads.html#evaluating-the-importance-of-rare-high-flow-events-flow-duration-curves) or from [my website](https://francoisbirgand.github.io/blog-flow-and-load-duration-curves.html). Calculate are report the W~2%~, W~5%~, M~2%~, and M~5%~ for each of the four parameters. Comment of what this might mean in terms of monitoring needs, and treatment system requirement if you were to treat this water through a treatment system.
+
 
 ```{r eval =TRUE, echo = FALSE,fig.height=10}
 
